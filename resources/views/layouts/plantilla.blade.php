@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <!-- csrf -->
+    @csrf
 
     <title>CAD Control Asistencia Docente</title>
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/app.css">
@@ -96,7 +96,7 @@ to get the desired effect
                             Salir
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            <!-- csrf -->
+                            @csrf
                     </div>
                 </li>
             </ul>
@@ -138,7 +138,7 @@ to get the desired effect
 
                             <form id="logout-form-nav" action="{{ route('logout') }}" method="POST"
                                 style="display: none; ">
-                                <!-- csrf -->
+                                @csrf
                                 <!-- <input type="hidden" name="_token" value="JKXTlrBkogmtIqshcIXfZFfaS9ocmFvNiw88MYhw"> -->
                             </form>
                         </li>
