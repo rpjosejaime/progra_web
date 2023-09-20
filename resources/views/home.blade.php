@@ -26,7 +26,7 @@
                                     </h5>
                                     <p class="card-text">Consulta la asistencia de los profesores a las clases.
                                     </p>
-                                    <a href="https://cetech.sjuanrio.tecnm.mx/docente/list_nivel_academico"
+                                    <a href="{{ route('reportesDocente') }}"
                                         class="btn btn-primary">Acceder
                                         <i class="fa fa-arrow-right"></i></a>
                                 </div>
@@ -49,7 +49,7 @@
                                 </h5>
                                 <p class="card-text">Ingresa para iniciar el recorrido y confirmar asistencia.
                                 </p>
-                                <a href="https://cetech.sjuanrio.tecnm.mx/docente/list_nivel_academico"
+                                <a href="{{ route('asistenciaDocente') }}"
                                     class="btn btn-primary">Acceder
                                     <i class="fa fa-arrow-right"></i></a>
                             </div>
@@ -65,7 +65,7 @@
                                 </h5>
                                 <p class="card-text">Agrega, elimina o modifica información de los prefectos.
                                 </p>
-                                <a href="https://cetech.sjuanrio.tecnm.mx/docente/list_nivel_academico"
+                                <a href="{{ route('crudPrefecto') }}"
                                     class="btn btn-primary">Acceder
                                     <i class="fa fa-arrow-right"></i></a>
                             </div>
