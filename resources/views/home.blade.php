@@ -24,13 +24,13 @@
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/autocompleter.css">
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/jqueryui-editable/css/jqueryui-editable.css">
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/checkbox_off.css">
-    <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/dataTables.bootstrap.min.css">                            
+    <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/dataTables.bootstrap.min.css">
 
     <!--  estilo institucion -->
-    
+
         <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/css_220034.css">
 
-    
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -61,13 +61,13 @@ to get the desired effect
                     </li>
 
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="https://cetech.sjuanrio.tecnm.mx/home" class="nav-link">
+                        <a href="https://cad.josejaime.me/home" class="nav-link">
                             <i class="fas fa-home"></i>
                             Inicio
                         </a>
                     </li>
 
-                    
+
                 </ul>
                         <!-- SEARCH FORM -->
             <!--form class="form-inline ml-3">
@@ -87,7 +87,7 @@ to get the desired effect
                                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            José Jaime  Rodríguez  <span class="caret"></span>
+                            {{ $nombre }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -131,7 +131,7 @@ to get the desired effect
                             <img src="/img/profile.png" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block"> José Jaime  Rodríguez </a>
+                            <a href="#" class="d-block"> {{ $nombre }} </a>
                         </div>
                     </div>
 
@@ -169,7 +169,7 @@ to get the desired effect
                             </div><!-- /.col -->
                             <div class="col-sm-6">
                                 <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="https://cetech.sjuanrio.tecnm.mx/home">Inicio</a>
+                                    <li class="breadcrumb-item"><a href="http://cad.josejaime.me/home">Inicio</a>
                                     </li>
                                     <li class="breadcrumb-item active"></li>
                                 </ol>
@@ -187,8 +187,8 @@ to get the desired effect
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                
-                
+
+
                 <div class="card">
                     <div class="card-header">Panel Principal</div>
 
@@ -197,7 +197,7 @@ to get the desired effect
                                                             <div class="col-sm-12">
                                     <div class="card">
                                         <div class="text-center card-body">
-                                            <p class="card-text"> José Jaime  Rodríguez </p>
+                                            <p class="card-text"> {{ $nombre }} </p>
                                                                                             <img src="/img/profile.png" width="80px" height="80px"
                                                     class="img-circle elevation-2" alt="User Image">
                                                                                     </div>
