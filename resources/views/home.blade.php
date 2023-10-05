@@ -9,7 +9,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="text-center card-body">
-                            <p class="card-text"> {{ $nombre }} </p>
+                            <p class="card-text"> {{ Auth::user()->nombre }} {{ Auth::user()->ap_paterno }} {{ Auth::user()->ap_materno }} </p>
                             <img src="/img/profile.png" width="80px" height="80px" class="img-circle elevation-2"
                                 alt="User Image">
                         </div>
@@ -17,7 +17,7 @@
                 </div>
                 <!--if vaidarRoles-->
                 <!--if vaidarRoles-->
-                    @hasrole('jefe')
+                    @hasrole('jefe|admin')
                         <div class="col-sm-4 ">
                             <div class="card">
                                 <div class="card-body">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                 @endrole
-                @role('jefe')
+                @role('jefe|admin')
                     <div class="col-sm-4 ">
                         <div class="card">
                             <div class="card-body">

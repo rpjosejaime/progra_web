@@ -15,19 +15,19 @@ class prefectoController extends Controller
     public function crudPrefecto()
     {
         $nombre = Auth::user()->name;
-        return view('prefectura.prefectos')->with('nombre', $nombre);
+        return view('prefectura.prefectos');
     }
 
     public function asistenciaDocente()
     {
         $nombre = Auth::user()->name;
-        return view('prefectura.recorrido')->with('nombre', $nombre);
+        return view('prefectura.recorrido');
     }
 
     public function reportesDocente()
     {
         $nombre = Auth::user()->name;
-        return view('prefectura.reportes')->with('nombre', $nombre);
+        return view('prefectura.reportes');
     }
 
 }

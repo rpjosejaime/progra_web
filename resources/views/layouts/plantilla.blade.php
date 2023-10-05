@@ -65,7 +65,7 @@ to get the desired effect
                 </li>
 
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="https://cad.josejaime.me/home" class="nav-link">
+                    <a href="{{ route('home') }}" class="nav-link">
                         <i class="fas fa-home"></i>
                         Inicio
                     </a>
@@ -80,7 +80,7 @@ to get the desired effect
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{ $nombre }} <span class="caret"></span>
+                        {{ Auth::user()->nombre }}<span class="caret"></span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -106,7 +106,7 @@ to get the desired effect
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
             <!-- Brand Logo -->
-            <a href="https://cad.josejaime.me/home" class="brand-link text-sm">
+            <a href="{{ route('home') }}" class="brand-link text-sm">
                 <img src="/img/logo.png" width="32px" height="32px" alt="Logo empresa"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Control Asistencia Docente</span>
@@ -120,7 +120,7 @@ to get the desired effect
                         <img src="/img/profile.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block"> {{ $nombre }} </a>
+                        <a href="#" class="d-block"> {{ Auth::user()->nombre }} </a>
                     </div>
                 </div>
 
@@ -160,7 +160,7 @@ to get the desired effect
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="http://cad.josejaime.me/home">Inicio</a>
+                                <li class="breadcrumb-item"><a href="{{ route('home') }}">Inicio</a>
                                 </li>
                                 <li class="breadcrumb-item active"></li>
                             </ol>

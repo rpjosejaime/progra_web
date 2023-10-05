@@ -31,7 +31,7 @@
 
     <div class="content">
 
-           
+
 <section class="vh-100" style="background-color: #1B396A;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -58,15 +58,15 @@
                         <input id="email" type="email" class="form-control "
                             name="email" value="" required autocomplete="email" autofocus>
                         <label for="email" class="form-label">Correo electrónico</label>
-                        
+
                   </div>
 
                   <div class="form-outline mb-4">
                         <input id="password" type="password" class="form-control "
                             name="password" required autocomplete="current-password">
                         <label for="password" class="text-md-rightform-label ">Contraseña</label>
-                       
-                        
+
+
                   </div>
 
                   <div class="pt-1 mb-4">
@@ -75,11 +75,11 @@
                         </button>
                   </div>
 
-                  
-                                            <a class="small text-muted" href="https://cetech.sjuanrio.tecnm.mx/password/reset">
+
+                                            <a class="small text-muted" href="https://localhost/password/reset">
                             ¿Olvidó su contraseña?
                         </a>
-                    
+
                     <a href="#!" class="small text-muted">Terms of use. 220034</a>
                     <a href="#!" class="small text-muted">Privacy policy</a>
                 </form>

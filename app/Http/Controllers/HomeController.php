@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Carrera;
+use App\Models\Grupo;
+use App\Models\GrupoAsistencia;
+use App\Models\GrupoHorario;
+use App\Models\Organigrama;
+use App\Models\Profesor;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -24,15 +31,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $nombre = Auth::user()->name;
-        return view('home')->with('nombre', $nombre);
+        //$nombre = Auth::user()->name;
+        return view('home');
     }
+
 
     public function test()
     {
-        $nombre = Auth::user()->name;
-        return view('test')->with('nombre', $nombre);
-    }
+        //$variable = Organigrama::all();
+        //$variable = Profesor::all();
+        //$variable = Grupo::all();
+        //$variable = GrupoHorario::all();
+        $variable = GrupoAsistencia::all();
 
+        return $variable;
+        //return view('test');
+    }
 
 }
