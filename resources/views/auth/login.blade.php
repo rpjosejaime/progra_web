@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -32,70 +30,81 @@
     <div class="content">
 
 
-<section class="vh-100" style="background-color: #1B396A;">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem;">
-          <div class="row g-0">
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
-              <img src="img/logo_login_tecnm.png"
-                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
-            </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
+        <section class="vh-100" style="background-color: #1B396A;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col col-xl-10">
+                        <div class="card" style="border-radius: 1rem;">
+                            <div class="row g-0">
+                                <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                    <img src="img/logo_login_tecnm.png" alt="login form" class="img-fluid"
+                                        style="border-radius: 1rem 0 0 1rem;" />
+                                </div>
+                                <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                    <div class="card-body p-4 p-lg-5 text-black">
 
-                <form method="POST" action="{{ route ('login') }}">
-                    @csrf
-                    <div class="d-flex align-items-center mb-3 pb-1">
-                    <img src="img/220034_login.png" width="90%" class="img-responsive" style="margin:0 auto;"/>
-                  </div>
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
+                                            <div class="d-flex align-items-center mb-3 pb-1">
+                                                <img src="img/220034_login.png" width="90%" class="img-responsive"
+                                                    style="margin:0 auto;" />
+                                            </div>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Plataforma CAD ITSJR Inicia sesión</h5>
+                                            <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Plataforma CAD
+                                                ITSJR Inicia sesión</h5>
 
-                  <div class="form-outline mb-4">
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger" role="alert">
+                                                    Estas credenciales no coinciden con nuestros registros
+                                                </div>
+                                            @endif
 
-                        <input id="email" type="email" class="form-control "
-                            name="email" value="" required autocomplete="email" autofocus>
-                        <label for="email" class="form-label">Correo electrónico</label>
+                                            <div class="form-outline mb-4">
 
-                  </div>
+                                                <input id="email" type="email" class="form-control "
+                                                    name="email" value="" required autocomplete="email"
+                                                    autofocus>
+                                                <label for="email" class="form-label">Correo electrónico</label>
 
-                  <div class="form-outline mb-4">
-                        <input id="password" type="password" class="form-control "
-                            name="password" required autocomplete="current-password">
-                        <label for="password" class="text-md-rightform-label ">Contraseña</label>
+                                            </div>
 
 
-                  </div>
+                                            <div class="form-outline mb-4">
+                                                <input id="password" type="password" class="form-control "
+                                                    name="password" required autocomplete="current-password">
+                                                <label for="password"
+                                                    class="text-md-rightform-label ">Contraseña</label>
 
-                  <div class="pt-1 mb-4">
-                        <button type="submit" class="btn btn-dark btn-lg btn-block">
-                                Entrar
-                        </button>
-                  </div>
+
+                                            </div>
+
+                                            <div class="pt-1 mb-4">
+                                                <button type="submit" class="btn btn-dark btn-lg btn-block">
+                                                    Entrar
+                                                </button>
+                                            </div>
 
 
                                             <a class="small text-muted" href="https://localhost/password/reset">
-                            ¿Olvidó su contraseña?
-                        </a>
+                                                ¿Olvidó su contraseña?
+                                            </a>
 
-                    <a href="#!" class="small text-muted">Terms of use. 220034</a>
-                    <a href="#!" class="small text-muted">Privacy policy</a>
-                </form>
+                                            <a href="#!" class="small text-muted">Terms of use. 220034</a>
+                                            <a href="#!" class="small text-muted">Privacy policy</a>
+                                        </form>
 
-              </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
-<script type="text/javascript">
-    document.getElementById("body_login").style.backgroundColor = "#1B396A";
-</script>
+        <script type="text/javascript">
+            document.getElementById("body_login").style.backgroundColor = "#1B396A";
+        </script>
 
 
     </div>
@@ -107,7 +116,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.proto.js"></script>
     <script src="https://cetech.sjuanrio.tecnm.mx/js/checkbox_off.js"></script>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0MEY0YXK6T"></script>
     <script>
         window.dataLayer = window.dataLayer || [];

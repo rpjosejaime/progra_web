@@ -1,6 +1,11 @@
 @extends('layouts.plantilla')
 
 @section('content')
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="card">
         <div class="card-header">Panel Principal</div>
 
@@ -9,7 +14,8 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="text-center card-body">
-                            <p class="card-text"> {{ Auth::user()->nombre }} {{ Auth::user()->ap_paterno }} {{ Auth::user()->ap_materno }} </p>
+                            <p class="card-text"> {{ Auth::user()->nombre }} {{ Auth::user()->ap_paterno }}
+                                {{ Auth::user()->ap_materno }} </p>
                             <img src="/img/profile.png" width="80px" height="80px" class="img-circle elevation-2"
                                 alt="User Image">
                         </div>
@@ -17,25 +23,23 @@
                 </div>
                 <!--if vaidarRoles-->
                 <!--if vaidarRoles-->
-                    @hasrole('jefe|admin')
-                        <div class="col-sm-4 ">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class=""><i class="fas fa-file"></i>
-                                        Reportes prefectura
-                                    </h5>
-                                    <p class="card-text">Consulta la asistencia de los profesores a las clases.
-                                    </p>
-                                    <a href="{{ route('reportesDocente') }}"
-                                        class="btn btn-primary">Acceder
-                                        <i class="fa fa-arrow-right"></i></a>
-                                </div>
+                @hasrole('jefe|admin')
+                    <div class="col-sm-4 ">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class=""><i class="fas fa-file"></i>
+                                    Reportes prefectura
+                                </h5>
+                                <p class="card-text">Consulta la asistencia de los profesores a las clases.
+                                </p>
+                                <a href="{{ route('reportesDocente') }}" class="btn btn-primary">Acceder
+                                    <i class="fa fa-arrow-right"></i></a>
                             </div>
                         </div>
-                    @else
+                    </div>
+                @else
                     <div class="col-sm-4 "> </div>
-
-                    @endhasrole
+                @endhasrole
                 <!--if sub 14-->
                 <!--if vaidarRoles-->
                 <!--if vaidarRoles-->
@@ -49,8 +53,7 @@
                                 </h5>
                                 <p class="card-text">Ingresa para iniciar el recorrido y confirmar asistencia.
                                 </p>
-                                <a href="{{ route('asistenciaDocente') }}"
-                                    class="btn btn-primary">Acceder
+                                <a href="{{ route('asistenciaDocente') }}" class="btn btn-primary">Acceder
                                     <i class="fa fa-arrow-right"></i></a>
                             </div>
                         </div>
@@ -65,8 +68,7 @@
                                 </h5>
                                 <p class="card-text">Agrega, elimina o modifica información de los prefectos.
                                 </p>
-                                <a href="{{ route('crudPrefecto') }}"
-                                    class="btn btn-primary">Acceder
+                                <a href="{{ route('crudPrefecto') }}" class="btn btn-primary">Acceder
                                     <i class="fa fa-arrow-right"></i></a>
                             </div>
                         </div>

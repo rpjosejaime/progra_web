@@ -41,11 +41,11 @@ class HomeController extends Controller
         //$variable = Organigrama::all();
         //$variable = Profesor::all();
         //$variable = Grupo::all();
-        //$variable = GrupoHorario::all();
-        $variable = GrupoAsistencia::all();
+        $grupos = Grupo::paginate();
+        //$variable = GrupoAsistencia::all();
 
-        return $variable;
-        //return view('test');
+        //return $variable;
+        return view('test', compact('grupos'));
     }
 
 }
