@@ -41,7 +41,13 @@
     <!-- chosen -->
     <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css">
-
+    <style>
+        @media (max-width: 768px) {
+            .hidden-mobile {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <!--
 BODY TAG OPTIONS:

@@ -21,7 +21,7 @@ class ChangePasswordController extends Controller
             'current_password' => 'required',
             'new_password' => 'required|string|min:8|confirmed',
         ]);
-
+        /** @var \App\Models\User $user **/
         $user = auth()->user();
 
         if (Hash::check($request->current_password, $user->password)) {

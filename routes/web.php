@@ -47,5 +47,6 @@ Route::get('/test', [HomeController::class, 'test'])->name('test');
 
 Route::group(['middleware' => ['role:prefecto|admin']], function () {
     Route::get('/prefectura/asistencia', [prefectoController::class, 'asistenciaDocente'])->name('asistenciaDocente');
+    Route::get('/prefectura/asistencia_edificio', [prefectoController::class, 'horarioEdificio'])->name('horarioEdificio');
 });
 

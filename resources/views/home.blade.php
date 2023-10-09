@@ -77,8 +77,22 @@
                 <!--if sub 14-->
                 <!--if vaidarRoles-->
                 <!--if vaidarRoles-->
-                <div class="col-sm-4 ">
-                </div>
+
+                @role('admin')
+                    <div class="col-sm-4 ">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class=""><i class="fas fa-check"></i>
+                                    Asistencia Docente
+                                </h5>
+                                <p class="card-text">Ingresa para iniciar el recorrido y confirmar asistencia.
+                                </p>
+                                <a href="{{ route('asistenciaDocente') }}" class="btn btn-primary">Acceder
+                                    <i class="fa fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @endrole
 
             </div>
         </div>
