@@ -34,7 +34,7 @@
         <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                Edificio
+                Seleccionar edificio
             </button>
             <div id="edificioDropdown" class="dropdown-menu">
                 @foreach ($edificios as $edificio)
@@ -120,7 +120,7 @@
                 $('select[name="asistencia[]"]').each(function () {
                     if ($(this).val() === 'Seleccione') {
                         isValid = false;
-                        alert('Por favor, seleccione una opción para todas las filas.');
+                        alert('Por favor, debe pasar asistencia en todo el edificio.');
                         return false; // Sale del bucle cuando encuentra una opción no seleccionada
                     }
                 });
