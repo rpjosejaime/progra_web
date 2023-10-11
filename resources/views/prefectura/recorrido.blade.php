@@ -6,8 +6,11 @@
         function mostrarHoraActual() {
             const horaActual = new Date();
             const hora = horaActual.getHours();
-            const minutos = horaActual.getMinutes();
-            const segundos = horaActual.getSeconds();
+            //const minutos = horaActual.getMinutes();
+            //const segundos = horaActual.getSeconds();
+            const minutos = horaActual.getMinutes().toString().padStart(2, '0');
+            const segundos = horaActual.getSeconds().toString().padStart(2, '0');
+
 
             const horaFormateada = `${hora}:${minutos}:${segundos}`;
             document.getElementById('hora-actual').textContent = horaFormateada;
@@ -41,16 +44,16 @@
             </div>
         </div>
         <!-- <div class="btn-group">
-                                                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                                                        aria-expanded="false">
-                                                                        Salón
-                                                                    </button>
-                                                                    <div class="dropdown-menu">
-                                                                        <a class="dropdown-item" href="#">E</a>
-                                                                        <a class="dropdown-item" href="#">F</a>
-                                                                        <a class="dropdown-item" href="#">M</a>
-                                                                    </div>
-                                                                </div> -->
+                                                                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                                                    aria-expanded="false">
+                                                                                    Salón
+                                                                                </button>
+                                                                                <div class="dropdown-menu">
+                                                                                    <a class="dropdown-item" href="#">E</a>
+                                                                                    <a class="dropdown-item" href="#">F</a>
+                                                                                    <a class="dropdown-item" href="#">M</a>
+                                                                                </div>
+                                                                            </div> -->
     </div>
     <form action="{{ route('guardarAsistencia') }}" method="POST">
         @csrf
