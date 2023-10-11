@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class GrupoAsistencia extends Model
 {
-    protected $table = 'grupos_asistencias';
+    public $table = 'grupos_asistencias';
+    public $timestamps = false;
+    protected $primaryKey = ['clave_materia', 'clave_plan_estudios', 'periodo', 'letra_grupo', 'dia_semana'];
+    public $incrementing = false;
+    protected $fillable = [
+        'clave_materia',
+        'clave_plan_de_estudios',
+        'periodo', 'letra_grupo',
+        'dia_semana', 'asistencia',
+        'fecha_hora', 'observacion',
+        'RFC_prefecto'
+    ];
+
+    //protected $primaryKey = ['clave_materia', 'clave_plan_de_estudios', 'periodo', 'letra_grupo', 'dia_semana'];
 }

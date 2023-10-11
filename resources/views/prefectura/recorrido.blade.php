@@ -1,7 +1,7 @@
 @extends('layouts.plantilla')
 
 @section('content')
-    <script>
+    <script type="application/javascript">
         // Función para obtener y mostrar la hora actual
         function mostrarHoraActual() {
             const horaActual = new Date();
@@ -22,14 +22,18 @@
 
     <h3 class="text-center">Pase de asistencia</h3>
     <h5 class="text-center">Hora de recorrido <span id="hora-actual"></span></h5>
-
+    @if (session('success'))
+        <div id="success-message" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="options">
         <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Edificio
             </button>
-            <div class="dropdown-menu">
+            <div id="edificioDropdown" class="dropdown-menu">
                 @foreach ($edificios as $edificio)
                     <a class="dropdown-item" href="#"
                         data-edificio="{{ $edificio->edificio }}">{{ $edificio->edificio }}</a>
@@ -37,49 +41,53 @@
             </div>
         </div>
         <!-- <div class="btn-group">
-                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                    Salón
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">E</a>
-                    <a class="dropdown-item" href="#">F</a>
-                    <a class="dropdown-item" href="#">M</a>
-                </div>
-            </div> -->
+                                                                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                                        aria-expanded="false">
+                                                                        Salón
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" href="#">E</a>
+                                                                        <a class="dropdown-item" href="#">F</a>
+                                                                        <a class="dropdown-item" href="#">M</a>
+                                                                    </div>
+                                                                </div> -->
     </div>
+    <form action="{{ route('guardarAsistencia') }}" method="POST">
+        @csrf
+        <table id='tabla_horario' class="table table-striped mt-2">
 
-    <table class="table table-striped mt-2">
-
-        <thead>
-            <tr>
-                <th class="hidden-mobile">Clave</th>
-                <th>Materia</th>
-                <th class="hidden-mobile">Horario</th>
-                <th>Aula</th>
-                <th>Docente</th>
-                <th>Opciones</th>
-            </tr>
-        </thead>
-        <tbody id="horarios-table">
-
-            @foreach ($horarios as $horario)
+            <thead>
                 <tr>
-                    <td>{{ $horario->clave_materia }}</td>
-                    <td class="hidden-mobile">{{ $horario->nombre_materia }}</td>
-                    <td class="hidden-mobile">{{ $horario->hora_inicio }} - {{ $horario->hora_fin }} hrs</td>
-                    <td>{{ $horario->aula }}</td>
-                    <td>{{ $horario->nombre }} {{ $horario->ap_paterno }} {{ $horario->ap_materno }} </td>
-                    <td>Opciones</td>
+                    <th class="hidden-mobile">Clave</th>
+                    <th>Materia</th>
+                    <th class="hidden-mobile">Horario</th>
+                    <th>Aula</th>
+                    <th>Docente</th>
+                    <th>Asistencia</th>
+                    <th hidden>Plan Estudios</th>
+                    <th hidden>Periodo</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="horarios-table">
+                @include('layouts.tabla', ['horarios' => $horarios])
+            </tbody>
+        </table>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+
+        <div class="float-right">
+            <div class="float-right">
+                <button class="btn btn-success" id="guardar-button" type="submit">
+                    <i class="fas fa-arrow-circle-up"></i> Registrar
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <br><br><br><br>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="application/javascript"></script>
+    <script type="application/javascript">
         $(document).ready(function() {
-            $('.dropdown-item').click(function(e) {
+            $('#edificioDropdown .dropdown-item').click(function(e) {
                 e.preventDefault();
                 var edificio = $(this).data('edificio');
                 $.ajax({
@@ -89,9 +97,39 @@
                         edificio: edificio
                     },
                     success: function(data) {
+                        var successMessage = document.getElementById('success-message');
+                        if (successMessage) {
+                            successMessage.style.display = 'none';
+                        }
                         $('#horarios-table').html(data);
                     }
                 });
+            });
+        });
+    </script>
+    <script type="application/javascript">
+        $(document).ready(function () {
+            $('#guardar-button').off('click').on('click', function () {
+            //$('#guardar-button').click(function () {
+                var isValid = true;
+
+                // Itera a través de todos los selects con name="asistencia"
+                $('select[name="asistencia[]"]').each(function () {
+                    if ($(this).val() === 'Seleccione') {
+                        isValid = false;
+                        alert('Por favor, seleccione una opción para todas las filas.');
+                        return false; // Sale del bucle cuando encuentra una opción no seleccionada
+                    }
+                });
+
+                // Si todos los selects tienen opciones seleccionadas, envía el formulario
+                if (isValid) {
+                    $('form').submit();
+                }else{
+                    return false;
+                }
+
+
             });
         });
     </script>

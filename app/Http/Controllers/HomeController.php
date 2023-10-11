@@ -45,6 +45,12 @@ class HomeController extends Controller
         //$variable = GrupoAsistencia::all();
 
         //return $variable;
+        $dia_semana = date("w") + 1;
+        date_default_timezone_set("America/Chihuahua");
+        $hora_actual = date("H:i");
+
+        return $dia_semana;
+
         return view('test', compact('grupos'));
     }
 

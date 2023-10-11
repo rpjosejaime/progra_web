@@ -24,7 +24,7 @@
     <title>CAD Control Asistencia Docente</title>
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/app.css">
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/autocompleter.css">
-    <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/jqueryui-editable/css/jqueryui-editable.css">
+    <!-- <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/jqueryui-editable/css/jqueryui-editable.css"> -->
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/checkbox_off.css">
     <link rel="stylesheet" href="https://cetech.sjuanrio.tecnm.mx/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -228,28 +228,15 @@ to get the desired effect
     <!-- REQUIRED SCRIPTS -->
     <script src="https://cetech.sjuanrio.tecnm.mx/js/app.js"></script>
     <script src="https://cetech.sjuanrio.tecnm.mx/js/bootstrap3-typeahead.js"></script>
-    <script src="https://cetech.sjuanrio.tecnm.mx/jqueryui-editable/js/jqueryui-editable.min.js"></script>
+    <!-- <script src="https://cetech.sjuanrio.tecnm.mx/jqueryui-editable/js/jqueryui-editable.min.js"></script> -->
     <script src="https://cetech.sjuanrio.tecnm.mx/js/chosen.jquery.js"></script>
     <script src="https://cetech.sjuanrio.tecnm.mx/js/chosen.proto.js"></script>
     <script src="https://cetech.sjuanrio.tecnm.mx/js/checkbox_off.js"></script>
     <script src="https://cetech.sjuanrio.tecnm.mx/js/jquery.mask.min.js"></script>
 
-    <script src="https://cetech.sjuanrio.tecnm.mx/js/jquery.dataTables.min.js"></script>
-    <script src="https://cetech.sjuanrio.tecnm.mx/js/dataTables.bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $(".chosen-select").chosen();
-            //new DataTable('#data-table');
-            new DataTable('#data-table', {
-                info: false,
-                ordering: false,
-                paging: false,
-                language: {
-                    search: 'Buscar'
-                }
-            });
-        });
-    </script>
+    <!-- <script src="https://cetech.sjuanrio.tecnm.mx/js/jquery.dataTables.min.js"></script>
+    <script src="https://cetech.sjuanrio.tecnm.mx/js/dataTables.bootstrap.min.js"></script> -->
+
 
 </body>
 
