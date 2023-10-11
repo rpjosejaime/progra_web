@@ -44,7 +44,7 @@ class prefectoController extends Controller
         inner join profesores p on g.docente = p.rfc
         inner join materias m on g.clave_materia = m.clave_materia and g.clave_plan_estudios = m.clave_plan_estudios
         inner join aulas a on gh.aula = a.aula
-        where g.periodo = ? and dia_semana = ? and ? between hora_inicio and hora_fin order by gh.aula", ['23/2', 8, $hora_actual]);
+        where g.periodo = ? and dia_semana = ? and ? between hora_inicio and hora_fin order by CAST(SUBSTRING(gh.aula, 2) AS SIGNED)", ['23/2', 8, $hora_actual]);
 
         $edificios = DB::select("select distinct  edificio from aulas order by edificio;");
 
@@ -66,7 +66,7 @@ class prefectoController extends Controller
         inner join materias m on g.clave_materia = m.clave_materia and g.clave_plan_estudios = m.clave_plan_estudios
         inner join aulas a on gh.aula = a.aula
         left join grupos_asistencias ga on m.clave_materia = ga.clave_materia and gh.periodo = ga.periodo and gh.clave_plan_estudios = ga.clave_plan_estudios and ga.dia_semana = gh.dia_semana and ga.letra_grupo = gh.letra_grupo
-        where g.periodo = ? and gh.dia_semana = ? and ? between hora_inicio and hora_fin and edificio = ? order by asistencia ASC, gh.aula", ['23/2', $dia_semana, $hora_actual, $edificio]);
+        where g.periodo = ? and gh.dia_semana = ? and ? between hora_inicio and hora_fin and edificio = ? order by asistencia ASC, CAST(SUBSTRING(gh.aula, 2) AS SIGNED)", ['23/2', $dia_semana, $hora_actual, $edificio]);
 
         //$edificios = DB:: select("select distinct  edificio from aulas order by edificio;");
 
