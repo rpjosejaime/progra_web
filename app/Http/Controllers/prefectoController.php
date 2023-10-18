@@ -47,14 +47,17 @@ class prefectoController extends Controller
         where g.periodo = ? and dia_semana = ? and ? between hora_inicio and hora_fin order by CAST(SUBSTRING(gh.aula, 2) AS SIGNED)", ['23/2', 8, $hora_actual]);
 
         $edificios = DB::select("select distinct  edificio from aulas order by edificio;");
+        $mensaje = '';
 
-        return view('prefectura.recorrido', compact('horarios', 'edificios'));
+        return view('prefectura.recorrido', compact('horarios', 'edificios', 'mensaje'));
+
     }
 
     public function horarioEdificio(Request $request)
     {
         date_default_timezone_set("America/Chihuahua");
         $hora_actual = date("H:i");
+        //$hora_actual = '13:01';
         $edificio = $request->input('edificio');
         $dia_semana = date("w") + 1;
 
@@ -65,12 +68,20 @@ class prefectoController extends Controller
         inner join profesores p on g.docente = p.rfc
         inner join materias m on g.clave_materia = m.clave_materia and g.clave_plan_estudios = m.clave_plan_estudios
         inner join aulas a on gh.aula = a.aula
-        left join grupos_asistencias ga on m.clave_materia = ga.clave_materia and gh.periodo = ga.periodo and gh.clave_plan_estudios = ga.clave_plan_estudios and ga.dia_semana = gh.dia_semana and ga.letra_grupo = gh.letra_grupo
+        left join grupos_asistencias ga on m.clave_materia = ga.clave_materia and gh.periodo = ga.periodo and gh.clave_plan_estudios = ga.clave_plan_estudios and ga.dia_semana = gh.dia_semana and ga.letra_grupo = gh.letra_grupo and DATE(fecha_hora) = CURDATE()
         where g.periodo = ? and gh.dia_semana = ? and ? between hora_inicio and hora_fin and edificio = ? order by asistencia ASC, CAST(SUBSTRING(gh.aula, 2) AS SIGNED)", ['23/2', $dia_semana, $hora_actual, $edificio]);
 
         //$edificios = DB:: select("select distinct  edificio from aulas order by edificio;");
+        $mensaje = '';
+        if (count($horarios) == 0) {
+            // La consulta no devolvió resultados, así que configuramos un mensaje de alerta
+            $mensaje = 'No hay clases en este horario';
 
-        return view('layouts.tabla', compact('horarios'));
+            //return view('layouts.tabla', compact('horarios','mensaje'));
+        }
+
+        return view('layouts.tabla', compact('horarios','mensaje'));
+        //return view('layouts.tabla', compact('horarios'))->with('otro', 'No hay clases en este horario');
     }
 
     public function guardarAsistencia(Request $request)

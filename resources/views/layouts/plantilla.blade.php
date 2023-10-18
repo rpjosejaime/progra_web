@@ -16,7 +16,7 @@
 
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     @csrf
@@ -44,6 +44,12 @@
     <style>
         @media (max-width: 768px) {
             .hidden-mobile {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hidden-on-desktop {
                 display: none;
             }
         }
@@ -92,9 +98,9 @@ to get the desired effect
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
                         <a class="dropdown-item" href="{{ route('cambiar-contrasena') }}">
-                                <i class="fas fa-key"></i>
-                                Cambiar Contraseña
-                            </a>
+                            <i class="fas fa-key"></i>
+                            Cambiar Contraseña
+                        </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                                   document.getElementById('logout-form').submit();">

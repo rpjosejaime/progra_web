@@ -22,69 +22,119 @@
         // Mostrar la hora al cargar la página
         window.onload = mostrarHoraActual;
     </script>
-
-    <h3 class="text-center">Pase de asistencia</h3>
-    <h5 class="text-center">Hora de recorrido <span id="hora-actual"></span></h5>
-    @if (session('success'))
-        <div id="success-message" class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    <div class="options">
-        <div class="btn-group">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Seleccionar edificio
-            </button>
-            <div id="edificioDropdown" class="dropdown-menu">
-                @foreach ($edificios as $edificio)
-                    <a class="dropdown-item" href="#"
-                        data-edificio="{{ $edificio->edificio }}">{{ $edificio->edificio }}</a>
-                @endforeach
+    <div class="container-fluid">
+        <h3 class="text-center">Pase de asistencia</h3>
+        <h5 class="text-center">Hora de recorrido <span id="hora-actual"></span></h5>
+        @if (session('success'))
+            <div id="success-message" class="alert alert-success">
+                {{ session('success') }}
             </div>
-        </div>
-        <!-- <div class="btn-group">
-                                                                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                                                                    aria-expanded="false">
-                                                                                    Salón
-                                                                                </button>
-                                                                                <div class="dropdown-menu">
-                                                                                    <a class="dropdown-item" href="#">E</a>
-                                                                                    <a class="dropdown-item" href="#">F</a>
-                                                                                    <a class="dropdown-item" href="#">M</a>
-                                                                                </div>
-                                                                            </div> -->
-    </div>
-    <form action="{{ route('guardarAsistencia') }}" method="POST">
-        @csrf
-        <table id='tabla_horario' class="table table-striped mt-2">
-
-            <thead>
-                <tr>
-                    <th class="hidden-mobile">Clave</th>
-                    <th>Materia</th>
-                    <th class="hidden-mobile">Horario</th>
-                    <th>Aula</th>
-                    <th>Docente</th>
-                    <th>Asistencia</th>
-                    <th hidden>Plan Estudios</th>
-                    <th hidden>Periodo</th>
-                </tr>
-            </thead>
-            <tbody id="horarios-table">
-                @include('layouts.tabla', ['horarios' => $horarios])
-            </tbody>
-        </table>
+        @endif
 
 
-        <div class="float-right">
-            <div class="float-right">
-                <button class="btn btn-success" id="guardar-button" type="submit">
-                    <i class="fas fa-arrow-circle-up"></i> Registrar
+
+        <div class="options">
+            <div class="btn-group">
+                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Seleccionar edificio
                 </button>
+                <div id="edificioDropdown" class="dropdown-menu">
+                    @foreach ($edificios as $edificio)
+                        <a class="dropdown-item" href="#"
+                            data-edificio="{{ $edificio->edificio }}">{{ $edificio->edificio }}</a>
+                    @endforeach
+                </div>
+            </div>
+
+        </div>
+
+        <div class="tabla-contenedor">
+            <div class="col-md-12">
+                <form action="{{ route('guardarAsistencia') }}" method="POST">
+                    @csrf
+                    <table id='tabla_horario' class="table table-striped mt-2">
+
+                        <thead>
+                            <tr>
+                                <th class="hidden-mobile">Clave</th>
+                                <th>Materia</th>
+                                <th class="hidden-mobile">Horario</th>
+                                <th class="hidden-mobile">Aula</th>
+                                <th class="hidden-on-desktop">Aula/Hr</th>
+                                <th>Docente</th>
+                                <th>Asistencia</th>
+                                <th>Observación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="horarios-table">
+                            @include('layouts.tabla', ['horarios' => $horarios])
+                        </tbody>
+                    </table>
+
+
+                    <div class="float-right">
+                        <div class="float-right">
+                            <button class="btn btn-success" id="guardar-button" type="submit">
+                                <i class="fas fa-arrow-circle-up"></i> Registrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {{-- <div class="col-md-2">
+            <table id='tabla_horario' class="table">
+
+                <thead>
+                    <tr>
+
+                        <th>Observación</th>
+                    </tr>
+                </thead>
+                <tbody id="hor">
+                    <td>
+                        <div class="text-center">
+                            <button class="btn btn-warning" id="observacion">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tbody>
+            </table>
+        </div> --}}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="container-fluid">
+        <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Agregar Observación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí coloca tu formulario -->
+                        <!-- Por ejemplo, puedes incluir un formulario de Laravel Blade -->
+
+                        <textarea class="form-control" id="FormObservacion" rows="3"></textarea>
+                        <p>Nombre de la materia: <span id="nombreMateriaEnModal"></span></p>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
 
     <br><br><br><br>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="application/javascript"></script>
@@ -120,6 +170,7 @@
                 $('select[name="asistencia[]"]').each(function () {
                     if ($(this).val() === 'Seleccione') {
                         isValid = false;
+                        console.log('Falta pasar asistencia');
                         alert('Por favor, debe pasar asistencia en todo el edificio.');
                         return false; // Sale del bucle cuando encuentra una opción no seleccionada
                     }
@@ -135,5 +186,16 @@
 
             });
         });
+    </script>
+    <script type="application/javascript" >
+    document.addEventListener("DOMContentLoaded", function() {
+        $('#miModal').on('show.bs.modal', function(event) {
+            console.log('Valor de materia:', materia);
+            var button = $(event.relatedTarget); // Botón que abrió el modal
+            var materia = button.data('materia'); // Obtén el valor del atributo data-materia
+            // Asigna el valor al textarea
+            $('#FormObservacion').val(materia);
+        });
+    });
     </script>
 @endsection
