@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\GrupoHorario;
 use App\Models\GrupoAsistencia;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Mockery\Generator\StringManipulation\Pass\Pass;
@@ -20,8 +21,9 @@ class prefectoController extends Controller
 
     public function crudPrefecto()
     {
-        $nombre = Auth::user()->name;
-        return view('prefectura.prefectos');
+        //$nombre = Auth::user()->name;
+        $datos = User::all();
+        return view('prefectura.prefectos', compact('datos'));
     }
 
     public function getHora()
@@ -167,4 +169,6 @@ class prefectoController extends Controller
         $nombre = Auth::user()->name;
         return view('prefectura.reportes');
     }
+
+
 }
