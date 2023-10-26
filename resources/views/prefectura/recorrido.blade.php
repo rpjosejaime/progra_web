@@ -30,6 +30,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if (session('error'))
+            <div id="success-message" class="alert alert-success">
+                {{ session('error') }}
+            </div>
+        @endif
 
 
 
@@ -106,35 +111,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="container-fluid">
-        <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Agregar Observación</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- Aquí coloca tu formulario -->
-                        <!-- Por ejemplo, puedes incluir un formulario de Laravel Blade -->
 
-                        <textarea class="form-control" id="FormObservacion" rows="3"></textarea>
-                        <p>Nombre de la materia: <span id="nombreMateriaEnModal"></span></p>
-
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <br><br><br><br>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" type="application/javascript"></script>

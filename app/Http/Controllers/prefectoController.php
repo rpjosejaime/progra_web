@@ -65,7 +65,7 @@ class prefectoController extends Controller
 
         //$horarios = DB::select('SELECT * FROM tabla WHERE columna = ?', ['valor']);
         $horarios = DB::select("SELECT m.clave_materia, g.clave_plan_estudios, g.periodo, nombre_materia, DATE_FORMAT(hora_inicio, '%H:%i') as hora_inicio, DATE_FORMAT(hora_fin, '%H:%i') as hora_fin,
-        gh.aula, gh.letra_grupo, edificio, rfc, nombre, ap_paterno, ap_materno, asistencia from grupos_horarios gh
+        gh.aula, gh.letra_grupo, edificio, rfc, nombre, ap_paterno, ap_materno, asistencia, fecha_hora, observacion from grupos_horarios gh
         inner join grupos g on gh.clave_materia = g.clave_materia and gh.periodo = g.periodo and gh. clave_plan_estudios = g.clave_plan_estudios and gh.letra_grupo = g.letra_grupo
         inner join profesores p on g.docente = p.rfc
         inner join materias m on g.clave_materia = m.clave_materia and g.clave_plan_estudios = m.clave_plan_estudios
@@ -82,7 +82,10 @@ class prefectoController extends Controller
             //return view('layouts.tabla', compact('horarios','mensaje'));
         }
 
+        $edificios = DB::select("select distinct  edificio from aulas order by edificio;");
+
         return view('layouts.tabla', compact('horarios','mensaje'));
+        //return view('prefectura.recorrido', compact('horarios','mensaje'));
         //return view('layouts.tabla', compact('horarios'))->with('otro', 'No hay clases en este horario');
     }
 
@@ -110,6 +113,8 @@ class prefectoController extends Controller
                 ->where('periodo', $horarioData['periodo'])
                 ->where('letra_grupo', $horarioData['letra_grupo'])
                 ->where('dia_semana', $dia_semana)
+                //->where('fecha_hora', $dia_semana)
+                ->whereRaw('DATE(fecha_hora) = CURDATE()')
                 ->first();
 
             //return response()->json($existente);
@@ -145,7 +150,7 @@ class prefectoController extends Controller
                     //$existente->update(['fecha_hora' => $fechaHoraActual]);
 
                     DB::statement("UPDATE grupos_asistencias SET asistencia = ?, fecha_hora = ? WHERE  clave_materia=?
-                    AND clave_plan_estudios=? AND periodo=? AND letra_grupo=? AND dia_semana=?",
+                    AND clave_plan_estudios=? AND periodo=? AND letra_grupo=? AND dia_semana=? AND DATE(fecha_hora) = CURDATE()",
                     [$asistencias[$index], $fechaHoraActual, $horarioData['clave_materia'], $horarioData['clave_plan_estudios'], $horarioData['periodo'],
                     $horarioData['letra_grupo'], $dia_semana]);
 
@@ -162,7 +167,36 @@ class prefectoController extends Controller
         }
     }
 
+    public function agregarObservacion(Request $request)
+    {
 
+        $data = $request->all();
+        //return $data;
+        date_default_timezone_set("America/Chihuahua");
+        $hora_actual = date("H:i");
+        $dia_semana = date("w") + 1;
+
+        // Itera a través de los datos y guárdalos en la base de datos
+        $horariosJson = $request->input('horarios'); // Nombre del campo que contiene los datos de la tabla
+        //$horarios = json_decode($horariosJson, true);
+        $horarios = json_decode($horariosJson, true);
+        //$observacion = $horarios['observacion'];
+        $observacion = $hora_actual.': '.$request->input('observacion');
+        $cambio = false;
+
+        //return $observacion;
+        DB::statement("UPDATE grupos_asistencias SET observacion = ?  WHERE  clave_materia=?
+                    AND clave_plan_estudios=? AND periodo=? AND letra_grupo=? AND dia_semana=? AND DATE(fecha_hora) = CURDATE()",
+                    [ $observacion, $horarios['clave_materia'], $horarios['clave_plan_estudios'], $horarios['periodo'],
+                    $horarios['letra_grupo'], $dia_semana]);
+
+
+        //return $data;
+        return back()->with('success', 'Observacion agregada correctamente');
+        //return "Agregando Observación";
+        //$nombre = Auth::user()->name;
+        //return view('prefectura.reportes');
+    }
 
     public function reportesDocente()
     {
