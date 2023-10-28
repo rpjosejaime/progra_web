@@ -41,7 +41,8 @@
                                     @csrf
                                     <p><i class="fa-solid fa-school"></i> {{ $horario->aula }}&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-clock"></i> {{ $horario->hora_inicio }}-{{ $horario->hora_fin }}</p>
                                     <p><i class="fa-solid fa-chalkboard-user"></i> &nbsp; {{ $horario->nombre }} {{ $horario->ap_paterno }} {{ $horario->ap_materno }}</p>
-                                    <textarea class="form-control" id="FormObservacion" name="observacion" rows="3">{{ $horario->observacion }}</textarea>
+                                    <p @if (!$horario->observacion) hidden @endif style="white-space: pre-line;">{{ $horario->observacion }}</p>
+                                    <textarea class="form-control" id="FormObservacion" name="observacion" rows="3"></textarea>
                                     <input type="hidden" name="horarios" value="{{ json_encode($horario) }}">
                                 </form>
 

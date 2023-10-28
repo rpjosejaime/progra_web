@@ -52,7 +52,6 @@ class prefectoController extends Controller
         $mensaje = '';
 
         return view('prefectura.recorrido', compact('horarios', 'edificios', 'mensaje'));
-
     }
 
     public function horarioEdificio(Request $request)
@@ -84,7 +83,7 @@ class prefectoController extends Controller
 
         $edificios = DB::select("select distinct  edificio from aulas order by edificio;");
 
-        return view('layouts.tabla', compact('horarios','mensaje'));
+        return view('layouts.tabla', compact('horarios', 'mensaje'));
         //return view('prefectura.recorrido', compact('horarios','mensaje'));
         //return view('layouts.tabla', compact('horarios'))->with('otro', 'No hay clases en este horario');
     }
@@ -149,10 +148,14 @@ class prefectoController extends Controller
                     //$existente->update(['asistencia' => $asistencias[$index]]);
                     //$existente->update(['fecha_hora' => $fechaHoraActual]);
 
-                    DB::statement("UPDATE grupos_asistencias SET asistencia = ?, fecha_hora = ? WHERE  clave_materia=?
+                    DB::statement(
+                        "UPDATE grupos_asistencias SET asistencia = ?, fecha_hora = ? WHERE  clave_materia=?
                     AND clave_plan_estudios=? AND periodo=? AND letra_grupo=? AND dia_semana=? AND DATE(fecha_hora) = CURDATE()",
-                    [$asistencias[$index], $fechaHoraActual, $horarioData['clave_materia'], $horarioData['clave_plan_estudios'], $horarioData['periodo'],
-                    $horarioData['letra_grupo'], $dia_semana]);
+                        [
+                            $asistencias[$index], $fechaHoraActual, $horarioData['clave_materia'], $horarioData['clave_plan_estudios'], $horarioData['periodo'],
+                            $horarioData['letra_grupo'], $dia_semana
+                        ]
+                    );
 
                     $cambio = true;
                 }
@@ -181,14 +184,26 @@ class prefectoController extends Controller
         //$horarios = json_decode($horariosJson, true);
         $horarios = json_decode($horariosJson, true);
         //$observacion = $horarios['observacion'];
-        $observacion = $hora_actual.': '.$request->input('observacion');
+        if ($horarios['observacion']) {
+            $observacion = $horarios['observacion'] . ' \n ' . $hora_actual . ': ' . $request->input('observacion');
+        } else {
+            $observacion = $hora_actual . ': ' . $request->input('observacion');
+        }
+        $observacion = str_replace('\n', "\n", $observacion);
+
+
+        //$observacion = $horarios['observacion'] . '' . $hora_actual . ': ' . $request->input('observacion');
         $cambio = false;
 
         //return $observacion;
-        DB::statement("UPDATE grupos_asistencias SET observacion = ?  WHERE  clave_materia=?
+        DB::statement(
+            "UPDATE grupos_asistencias SET observacion = ?  WHERE  clave_materia=?
                     AND clave_plan_estudios=? AND periodo=? AND letra_grupo=? AND dia_semana=? AND DATE(fecha_hora) = CURDATE()",
-                    [ $observacion, $horarios['clave_materia'], $horarios['clave_plan_estudios'], $horarios['periodo'],
-                    $horarios['letra_grupo'], $dia_semana]);
+            [
+                $observacion, $horarios['clave_materia'], $horarios['clave_plan_estudios'], $horarios['periodo'],
+                $horarios['letra_grupo'], $dia_semana
+            ]
+        );
 
 
         //return $data;
@@ -203,6 +218,4 @@ class prefectoController extends Controller
         $nombre = Auth::user()->name;
         return view('prefectura.reportes');
     }
-
-
 }
