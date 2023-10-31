@@ -35,18 +35,21 @@ class prefectoController extends Controller
 
     public function asistenciaDocente()
     {
-        date_default_timezone_set("America/Chihuahua");
+        date_default_timezone_set("America/Mexico_City");
         $hora_actual = date("H:i");
         $dia_semana = date("w") + 1;
 
+        $edificio = 'Pa';
+
         //$horarios = DB::select('SELECT * FROM tabla WHERE columna = ?', ['valor']);
         $horarios = DB::select("SELECT m.clave_materia, g.clave_plan_estudios, g.periodo, nombre_materia, DATE_FORMAT(hora_inicio, '%H:%i') as hora_inicio, DATE_FORMAT(hora_fin, '%H:%i') as hora_fin,
-        gh.aula, gh.letra_grupo, edificio, rfc, nombre, ap_paterno, ap_materno from grupos_horarios gh
+        gh.aula, gh.letra_grupo, edificio, rfc, nombre, ap_paterno, ap_materno, asistencia, fecha_hora, observacion from grupos_horarios gh
         inner join grupos g on gh.clave_materia = g.clave_materia and gh.periodo = g.periodo and gh. clave_plan_estudios = g.clave_plan_estudios and gh.letra_grupo = g.letra_grupo
         inner join profesores p on g.docente = p.rfc
         inner join materias m on g.clave_materia = m.clave_materia and g.clave_plan_estudios = m.clave_plan_estudios
         inner join aulas a on gh.aula = a.aula
-        where g.periodo = ? and dia_semana = ? and ? between hora_inicio and hora_fin order by CAST(SUBSTRING(gh.aula, 2) AS SIGNED)", ['23/2', 8, $hora_actual]);
+        left join grupos_asistencias ga on m.clave_materia = ga.clave_materia and gh.periodo = ga.periodo and gh.clave_plan_estudios = ga.clave_plan_estudios and ga.dia_semana = gh.dia_semana and ga.letra_grupo = gh.letra_grupo and DATE(fecha_hora) = CURDATE()
+        where g.periodo = ? and gh.dia_semana = ? and ? between hora_inicio and hora_fin and edificio = ? order by asistencia ASC, CAST(SUBSTRING(gh.aula, 2) AS SIGNED)", ['23/2', $dia_semana, $hora_actual, $edificio]);
 
         $edificios = DB::select("select distinct  edificio from aulas order by edificio;");
         $mensaje = '';
@@ -56,7 +59,7 @@ class prefectoController extends Controller
 
     public function horarioEdificio(Request $request)
     {
-        date_default_timezone_set("America/Chihuahua");
+        date_default_timezone_set("America/Mexico_City");
         $hora_actual = date("H:i");
         //$hora_actual = '13:01';
         $edificio = $request->input('edificio');
@@ -93,7 +96,7 @@ class prefectoController extends Controller
         $data = $request->all();
         $rfcPrefecto = Auth::user()->RFC;
 
-        date_default_timezone_set("America/Chihuahua");
+        date_default_timezone_set("America/Mexico_City");
         $fechaHoraActual = date('Y-m-d H:i');
         $dia_semana = date("w") + 1;
 
@@ -172,10 +175,9 @@ class prefectoController extends Controller
 
     public function agregarObservacion(Request $request)
     {
-
         $data = $request->all();
         //return $data;
-        date_default_timezone_set("America/Chihuahua");
+        date_default_timezone_set("America/Mexico_City");
         $hora_actual = date("H:i");
         $dia_semana = date("w") + 1;
 
