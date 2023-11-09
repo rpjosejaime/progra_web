@@ -2,17 +2,7 @@
 <!--<html lang="es">-->
 
 <head>
-    <!-- Google tag (gtag.js) -->
-    <!--<script async src="https://www.googletagmanager.com/gtag/js?id=G-0MEY0YXK6T"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-0MEY0YXK6T');
-    </script>-->
 
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
