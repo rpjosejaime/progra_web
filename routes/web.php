@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
 use App\Http\Controllers\prefectoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReporteController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -39,7 +40,11 @@ Route::post('/cambiar-contrasena', [App\Http\Controllers\Auth\ChangePasswordCont
 
 Route::group(['middleware' => ['role:jefe|admin']], function () {
     Route::get('/prefectura/edit', [prefectoController::class, 'crudPrefecto'])->name('crudPrefecto');
-    Route::get('/prefectura/reportes', [prefectoController::class, 'reportesDocente'])->name('reportesDocente');
+    Route::get('/prefectura/reportes', [prefectoController::class, 'reportesDocente'])->name('reportesDocente2');
+    Route::get('/prefectura/listado', [ReporteController::class, 'index'])->name('reportesDocente');
+    Route::get('/prefectura/listado_docentes', [ReporteController::class, 'listadoDocente'])->name('listadoDocente');
+
+
     //Ruta para añadir un nuevo prefecto
     Route::get("/anadir-prefecto", [App\Http\Controllers\Auth\RegisterController::class, "createUser"])->name("createUser");
     //Ruta para eliminar un prefecto
