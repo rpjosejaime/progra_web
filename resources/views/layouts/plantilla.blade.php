@@ -51,7 +51,7 @@
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
-            var u = "//137.184.44.236:8020/";
+            var u = "//137.184.44.236:8043/";
             _paq.push(['setTrackerUrl', u + 'matomo.php']);
             _paq.push(['setSiteId', '1']);
             var d = document,
