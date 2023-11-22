@@ -40,6 +40,7 @@ class HomeController extends Controller
     {
         //$variable = Organigrama::all();
         //$variable = Profesor::all();
+
         //$variable = Grupo::all();
         $grupos = Grupo::paginate();
         //$variable = GrupoAsistencia::all();
