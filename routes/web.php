@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers;
+//use App\Http\Controllers;
 use App\Http\Controllers\prefectoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReporteController;
